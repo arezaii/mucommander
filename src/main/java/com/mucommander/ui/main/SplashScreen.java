@@ -42,9 +42,15 @@ public class SplashScreen extends JWindow {
 
     /** Current loading message displayed on this splash screen */
     private String loadingMessage;
+    
+    /** my custom string to display on splash screen */
+    private String customMessage = "AHMAD REZAII's";
 
     /** Font used to display version and loading message on this splash screen */
     private Font customFont;
+    
+    /** Font used to display custom message on this splash screen */
+    private Font myCustomFont;
 
     /** Path to the splash screen logo image within the JAR file */
     private final static String SPLASH_IMAGE_PATH = IconManager.getIconSetFolder(IconManager.MUCOMMANDER_ICON_SET)+"splash.png";
@@ -56,6 +62,9 @@ public class SplashScreen extends JWindow {
     private final static int FONT_STYLE = Font.BOLD;
     /** Size of the font used to display text on this splash screen */
     private final static int FONT_SIZE = 11;
+    
+    /** Size of the font used to display text on this splash screen */
+    private final static int CUSTOM_FONT_SIZE = 24;
 	
     /** Color of the text displayed on this splash screen */ 
     private final static Color TEXT_COLOR = new Color(192, 238, 241);
@@ -70,6 +79,13 @@ public class SplashScreen extends JWindow {
     private final static int VERSION_MARGIN_X = 5;
     /** Number of pixels between the version information and the top of the splash image */
     private final static int VERSION_MARGIN_Y = 3;
+    
+    
+    /** Number of pixels between the custom message and the right side of the splash image */
+    private final static int CUSTOM_MARGIN_X = 0;
+    /** Number of pixels between the custom information and the top of the splash image */
+    private final static int CUSTOM_MARGIN_Y = 20;
+
 
 
     /**
@@ -84,7 +100,8 @@ public class SplashScreen extends JWindow {
 
         // Create a custom font
         this.customFont = new Font(FONT_NAME, FONT_STYLE, FONT_SIZE);
-
+        this.myCustomFont = new Font(FONT_NAME, FONT_STYLE, CUSTOM_FONT_SIZE);
+        
         // Resolve the URL of the splash logo image within the JAR file and create an ImageIcon
         // Note: DO NOT use IconManager to load the icon as it would trigger ConfigurationManager's initialization
         // and we don't want that, we want SpashScreen to be displayed as soon as possible
@@ -155,5 +172,20 @@ public class SplashScreen extends JWindow {
 
         g.setColor(TEXT_COLOR);
         g.drawString(version, textX, textY);
+        
+        //display custom message in upper center
+        g.setFont(myCustomFont);
+        textBounds = new java.awt.font.TextLayout(customMessage, myCustomFont, fontRenderContext).getBounds();
+        
+        textX = getWidth()/2-(int)textBounds.getWidth()/2-CUSTOM_MARGIN_X;
+        textY = (int)textBounds.getHeight()+ CUSTOM_MARGIN_Y;
+        
+        g.setColor(SHADOW_TEXT_COLOR);
+        g.drawString(customMessage, textX-1, textY-1);
+
+        g.setColor(TEXT_COLOR);
+        g.drawString(customMessage, textX, textY);
+
+        
     }
 }

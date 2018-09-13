@@ -79,6 +79,8 @@ public class muCommander {
     /** Launch lock. */
     private static final Object LAUNCH_LOCK = new Object();
 
+    private static final long SPLASH_SCREEN_DURATION = 5000;
+    
     /** Whether or not to display verbose error messages. */
     @Parameter(names={"-S", "--silent"}, description="Do not print verbose error messages")
     private boolean silent;
@@ -407,7 +409,9 @@ public class muCommander {
             useSplash = MuConfigurations.getPreferences().getVariable(MuPreference.SHOW_SPLASH_SCREEN, MuPreferences.DEFAULT_SHOW_SPLASH_SCREEN);
             if(useSplash) {
                 splashScreen = new SplashScreen(RuntimeConstants.VERSION, "Loading preferences...");}
-
+            
+            
+            
             boolean showSetup;
             showSetup = MuConfigurations.getPreferences().getVariable(MuPreference.THEME_TYPE) == null;
 
@@ -527,6 +531,7 @@ public class muCommander {
                     com.mucommander.ui.notifier.AbstractNotifier.getNotifier().setEnabled(true);
             }
 
+            Thread.sleep(SPLASH_SCREEN_DURATION);
             // Dispose splash screen.
             if(splashScreen!=null)
                 splashScreen.dispose();
