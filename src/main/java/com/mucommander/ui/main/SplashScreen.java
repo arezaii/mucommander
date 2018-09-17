@@ -65,6 +65,9 @@ public class SplashScreen extends JWindow {
     
     /** Size of the font used to display text on this splash screen */
     private final static int CUSTOM_FONT_SIZE = 24;
+    
+    /** Color of the custom text displayed on this splash screen */ 
+    private final static Color CUSTOM_TEXT_COLOR = new Color(255, 255, 255);
 	
     /** Color of the text displayed on this splash screen */ 
     private final static Color TEXT_COLOR = new Color(192, 238, 241);
@@ -183,7 +186,7 @@ public class SplashScreen extends JWindow {
         g.setColor(SHADOW_TEXT_COLOR);
         g.drawString(customMessage, textX-1, textY-1);
 
-        g.setColor(TEXT_COLOR);
+        g.setColor(CUSTOM_TEXT_COLOR);
         g.drawString(customMessage, textX, textY);
 
         
